@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+  <!-- Directivas creadas por nosotros: --> 
+  <script src="components/nuevas-directivas/directiva-focus.js"></script>
+  <script src="components/nuevas-directivas/change-styles.js"></script>
+
+  <!-- Filtros creados por nosotros: -->
+  <script src="components/filters/currency-filter.js"></script>
+
   <script src="components/message.js"></script>
   <script src="components/computed-properties.js"></script>
   <script src="components/methods.js"></script>
@@ -15,10 +24,26 @@
   <script src="components/login-form.js"></script>
   <script src="components/loops.js"></script>
   <script src="components/conditionals.js"></script>
+  <script src="components/slots.js"></script>
+  <script src="components/watchers.js"></script>
+  <script src="components/computed-getter-setter.js"></script>
+  <script src="components/props.js"></script>
+  <!-- Componentes dinámicos -->
+  <script src="components/dynamic-components/cmp1.js"></script>
+  <script src="components/dynamic-components/cmp2.js"></script>
+  <script src="components/dynamic-components/cmp3.js"></script>
+  <script src="components/load-dynamic-cmps.js"></script>
+  <!-- end dinámicos -->
+  <script src="components/mixins.js"></script>
+  <!-- Plugins -->
+  <script src="components/plugins/aboutMe.js"></script>
+  
+
+
 </head>
 <body>
   <div id="app" style="margin-bottom: 100px;"> 
-    <message></message>
+    <message v-change-styles="{backgroundColor: 'aqua', color: 'gray'}"></message>
     <hr>
     <computed-properties></computed-properties>
     <hr>
@@ -39,10 +64,32 @@
     <loops></loops>
     <hr>
     <conditionals></conditionals>
+    <hr>
+    <slots-vue>
+      <template slot="header">
+        <h3>header con SLOTS</h3>
+      </template>
+    </slots-vue>
+    <hr>
+    <watchers></watchers>
+    <hr>
+    <computed-getter-setter></computed-getter-setter>
+    <hr>
+    <div>
+      <p>ojo!! lo tengo que encerrar en un div para que se vean los componentes de abajo.</p>
+      <load-dynamic-cmps></load-diynamic-cmps>
+    </div>
+    <hr>
+    <mixins-learn></mixins-learn>
+    <p>{{ mixinData }} en la raíz</p>
+    <hr>
+    <props :user="{name:'Jorge', surname:'Nunez', age:'24'}"></props>
+    
   </div>
   <script>
     new Vue({
       el: '#app',
+      mixins: [myMixin],
       data () {
         return {
           appName: 'Iniciando con Vuejs'
@@ -60,6 +107,15 @@
         setTimeout(() => {
           this.$refs.childMethod.showCompName();
         }, 2000)
+        // Plugins:
+        console.log(this.$me('Jorge', 24));
+      },
+      directives: {
+        focusTwo: {
+          inserted: function(el){
+            el.focus()
+          }
+        }
       }
     })
   </script>

@@ -8,7 +8,7 @@ Vue.component('vmodel', {
   template: `
     <div>
       <h2>Trabajando con vmodel</h2>
-      <input v-model="framework" type="text">
+      <input v-model="framework" type="text" v-focus>
       <p>El framework escogido es: {{ framework }}</p>
       <h2>Vmodel con array</h2>
       <input type="checkbox" id="vuejs2" value="Vuejs 2" v-model="frameworks">
